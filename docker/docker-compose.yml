@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:16
+    container_name: quotes_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: quoteuser
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: quotes
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+
+volumes:
+  db_data:
