@@ -12,6 +12,24 @@ services:
       - ./init:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
+  api:
+      build: ../backend
+      container_name: quotes_api
+      ports:
+        - "3000:3000"
+      depends_on:
+        - db
 
+  nginx:
+    image: nginx:latest
+    container_name: quotes_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d:ro
+      # wenn du das React-Frontend baust, z.B.:
+      # - ./frontend/build:/usr/share/nginx/html:ro
+    depends_on:
+      - api
 volumes:
   db_data:
