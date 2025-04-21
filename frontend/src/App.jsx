@@ -28,6 +28,30 @@ function App() {
       ) : (
         <p>Loading...</p>
       )}
+      <button
+        onClick={() => {
+          fetch("/api/quotes/random/schueler")
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              setQuote(data);
+            });
+        }}
+      >
+        new schüler quote
+      </button>
+      <button
+        onClick={() => {
+          fetch("/api/quotes/random/lehrer")
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              setQuote(data);
+            });
+        }}
+      >
+        new lehrer quote
+      </button>
     </div>
   );
 }
