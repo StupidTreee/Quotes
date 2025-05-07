@@ -18,7 +18,7 @@ endif
 up:
 	docker compose up -d
 	$(SLEEP_CMD)
-	python ./init/import_quotes.py
+	python ./backend/postgres_init/import_quotes.py
 
 down:
 	docker compose down -v

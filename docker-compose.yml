@@ -1,31 +1,38 @@
 services:
+
+#postgres db
   db:
     image: postgres:latest
-    container_name: quotes_postgres
+    container_name: postgres_quotes
     restart: always
     environment:
       POSTGRES_USER: quoteuser
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: quotes
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data:Z
       - ./init:/docker-entrypoint-initdb.d:Z
     ports:
       - "5432:5432"
+
+# api 
   api:
-      build: ../backend
-      container_name: quotes_api
+      build: ./backend
+      container_name: api_quotes
       ports:
         - "3000:3000"
       depends_on:
         - db
 
+# frontend angular 
   nginx:
     image: nginx:latest
-    container_name: quotes_nginx
+    container_name: frontend_quotes
     ports:
       - "80:80"
     depends_on:
       - api
-volumes:
-  db_data:
+    volumes: 
+      - frontend:/app:Z
+    command: "sh -c npm install && npm run dev"
+    user: "root"
