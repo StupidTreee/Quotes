@@ -10,8 +10,7 @@ services:
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: quotes
     volumes:
-      - db_data:/var/lib/postgresql/data:Z
-      - ./init:/docker-entrypoint-initdb.d:Z
+      - ./backend/postgres_init:/docker-entrypoint-initdb.d:Z
     ports:
       - "5432:5432"
 
@@ -23,6 +22,8 @@ services:
         - "3000:3000"
       depends_on:
         - db
+      volumes:
+        - ./backend:/app:Z
 
 # frontend angular 
   nginx:
@@ -33,6 +34,6 @@ services:
     depends_on:
       - api
     volumes: 
-      - frontend:/app:Z
+      - ./frontend:/app:Z
     command: "sh -c npm install && npm run dev"
     user: "root"
