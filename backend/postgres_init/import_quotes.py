@@ -1,3 +1,4 @@
+import os
 import json
 import psycopg2
 
@@ -34,5 +35,8 @@ def insert_quotes(file_path, table_name):
     print(f"{len(quotes)} quotes imported into {table_name}")
 
 if __name__ == "__main__":
-    insert_quotes("./backend/postgres_init/schueler_filtered.json", "schueler_quotes")
-    insert_quotes("./backend/postgres_init/lehrer_filtered.json", "lehrer_quotes")
+    schueler_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "schueler_filtered.json")
+    lehrer_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "lehrer_filtered.json")
+
+    insert_quotes(schueler_file_path, "schueler_quotes")
+    insert_quotes(lehrer_file_path, "lehrer_quotes")
