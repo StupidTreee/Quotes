@@ -14,26 +14,38 @@ services:
     ports:
       - "5432:5432"
 
-# api 
   api:
-      build: ./backend
-      container_name: api_quotes
-      ports:
-        - "3000:3000"
-      depends_on:
-        - db
-      volumes:
-        - ./backend:/app:Z
+    image: node:22-slim
+    container_name: api_quotes
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/app:Z
+      - /app/node_modules
+    command: sh -c "npm install && npm start"
 
-# frontend angular 
-  nginx:
-    image: nginx:latest
+# frontend angular (dev)
+  frontend:
+    image: node:22-slim
     container_name: frontend_quotes
     ports:
-      - "80:80"
+      - "4200:4200"
     depends_on:
       - api
+    working_dir: /app
     volumes: 
       - ./frontend:/app:Z
-    command: "sh -c npm install && npm run dev"
-    user: "root"
+    command: "sh -c 'npm install && npx ng serve --host 0.0.0.0 --port 4200'"
+
+
+# frontend angular (production)
+#frontend:
+#  image: nginx:latest
+#  container_name: frontend_quotes
+#  ports:
+#    - "80:80"
+#  volumes:
+#    - ./frontend/dist/frontend:/usr/share/nginx/html:Z

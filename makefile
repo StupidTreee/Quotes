@@ -22,3 +22,14 @@ up:
 
 down:
 	docker compose down -v
+
+reb:
+	docker compose restart
+	$(SLEEP_CMD)
+	python ./backend/postgres_init/import_quotes.py
+
+build:
+	docker compose build
+	docker compose up -d
+	$(SLEEP_CMD)
+	python ./backend/postgres_init/import_quotes.py

@@ -1,7 +1,8 @@
-FROM node:18-alpine
+FROM node:22-slim
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
-COPY default.conf /etc/nginx/conf.d/default.conf
+RUN npm install --save-dev nodemon
+COPY . .
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["npx", "nodemon", "index.js"]
