@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class QuoteService {
-  private apiUrl = 'http://localhost:3000/api/quotes/random/schueler';  // passt später an
+  private apiUrl = 'http://localhost:3000/api/quotes/schueler/random';  // passt später an
 
   constructor(private http: HttpClient) {}
 

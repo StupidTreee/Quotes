@@ -17,7 +17,7 @@ export class AppComponent {
 
   loadQuote() {
     this.quoteService.getRandomQuote().subscribe({
-      next: (data) => this.quote = data.message,   // oder data.quoteText je nach API
+      next: (data) => this.quote = data.message,
       error: (err) => console.error('Error:', err)
     });
   }

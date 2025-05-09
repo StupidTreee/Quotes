@@ -38,8 +38,8 @@ services:
     working_dir: /app
     volumes: 
       - ./frontend:/app:Z
-    command: "sh -c 'npm install && npx ng serve --host 0.0.0.0 --port 4200'"
-
+      - /app/node_modules
+    command: sh -c "npm install && npm start"
 
 # frontend angular (production)
 #frontend:
