@@ -4,7 +4,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --watch './**/*.js' --exec node index.js"
+    "start": "nodemon -L"
   },
   "dependencies": {
     "cors": "^2.8.5",

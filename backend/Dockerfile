@@ -5,4 +5,4 @@ RUN npm install
 RUN npm install --save-dev nodemon
 COPY . .
 EXPOSE 3000
-CMD ["npx", "nodemon", "index.js"]
+CMD ["npm", "start"]

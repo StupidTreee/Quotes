@@ -5,9 +5,14 @@ import { swaggerSpec } from './docs/swagger.js';
 import schuelerRoutes from './routes/schueler.js';
 import lehrerRoutes from './routes/lehrer.js';
 
+const router = express.Router();
 const app = express();
 app.use(express.json());
 const PORT = 3000;
+
+router.get('/', (req, res) => {
+  res.send('API is running!');
+});
 
 app.use(cors());
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
