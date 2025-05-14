@@ -23,7 +23,7 @@ services:
     depends_on:
       - db
     volumes:
-      - ./backend:/app:Z
+      - ./backend:/app:z
       - /app/node_modules
     command: sh -c "npm install && npm start"
 
