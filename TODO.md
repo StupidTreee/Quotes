@@ -14,6 +14,7 @@
 [ ] lehrer volle endpoints implementet
 [x] weg von common.js
 [x] http codes implementet
+[ ] schueler und lehrer combinen mit variable für was man verwenden will
 
 ## DB
 

@@ -3,7 +3,23 @@ import { pool } from '../db/pool.js';
 
 const router = express.Router();
 
-// Get all quotes
+/**
+ * @swagger
+ * /api/quotes/schueler:
+ *   get:
+ *     summary: Get all Schueler quotes
+ *     responses:
+ *       200:
+ *         description: List of quotes
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/SchuelerQuote'
+ *       500:
+ *         description: Internal Server Error
+ */
 router.get('/', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM schueler_quotes');
@@ -14,6 +30,29 @@ router.get('/', async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/quotes/schueler/quote/{id}:
+ *   get:
+ *     summary: Get a Schueler quote by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Quote found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SchuelerQuote'
+ *       404:
+ *         description: Quote not found
+ *       500:
+ *         description: Internal Server Error
+ */
 router.get('/quote/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -36,8 +75,14 @@ router.get('/quote/:id', async (req, res) => {
  *     responses:
  *       200:
  *         description: Quote found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SchuelerQuote'
  *       404:
- *         description: Quote not found
+ *         description: No quotes found
+ *       500:
+ *         description: Internal Server Error
  */
 router.get('/random', async (req, res) => {
   try {
@@ -52,7 +97,38 @@ router.get('/random', async (req, res) => {
   }
 });
 
-// Create quote
+/**
+ * @swagger
+ * /api/quotes/schueler:
+ *   post:
+ *     summary: Create a new Schueler quote
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - message
+ *               - timestamp
+ *             properties:
+ *               message:
+ *                 type: string
+ *               timestamp:
+ *                 type: string
+ *                 format: date-time
+ *     responses:
+ *       201:
+ *         description: Quote created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SchuelerQuote'
+ *       400:
+ *         description: Missing fields
+ *       500:
+ *         description: Internal Server Error
+ */
 router.post('/', express.json(), async (req, res) => {
   const { message, timestamp } = req.body;
   if (!message || !timestamp) {
@@ -71,7 +147,41 @@ router.post('/', express.json(), async (req, res) => {
   }
 });
 
-// Update quote
+/**
+ * @swagger
+ * /api/quotes/schueler/{id}:
+ *   patch:
+ *     summary: Update a Schueler quote
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               message:
+ *                 type: string
+ *               timestamp:
+ *                 type: string
+ *                 format: date-time
+ *     responses:
+ *       200:
+ *         description: Quote updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SchuelerQuote'
+ *       404:
+ *         description: Quote not found
+ *       500:
+ *         description: Internal Server Error
+ */
 router.patch('/:id', express.json(), async (req, res) => {
   const { id } = req.params;
   const { message, timestamp } = req.body;
@@ -90,7 +200,25 @@ router.patch('/:id', express.json(), async (req, res) => {
   }
 });
 
-// Delete quote
+/**
+ * @swagger
+ * /api/quotes/schueler/{id}:
+ *   delete:
+ *     summary: Delete a Schueler quote
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Quote deleted
+ *       404:
+ *         description: Quote not found
+ *       500:
+ *         description: Internal Server Error
+ */
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   try {
