@@ -1,5 +1,7 @@
 <div class="container">
   <h1>Random Quote</h1>
-  <p>{{ quote }}</p>
+  <div class="quote" [innerHTML]="quoteHtml">
+    <code> test</code>
+  </div>
   <button (click)="loadQuote()">Reload</button>
 </div>

@@ -1,5 +1,4 @@
 import swaggerJSDoc from 'swagger-jsdoc';
-import swaggerUi from 'swagger-ui-express';
 
 export const swaggerSpec = swaggerJSDoc({
   definition: {

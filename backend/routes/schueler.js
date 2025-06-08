@@ -16,7 +16,15 @@ const router = express.Router();
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/SchuelerQuote'
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   message:
+ *                     type: string
+ *                   timestamp:
+ *                     type: string
+ *                     format: date-time
  *       500:
  *         description: Internal Server Error
  */
@@ -47,7 +55,15 @@ router.get('/', async (req, res) => {
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/SchuelerQuote'
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 message:
+ *                   type: string
+ *                 timestamp:
+ *                   type: string
+ *                   format: date-time
  *       404:
  *         description: Quote not found
  *       500:
@@ -78,7 +94,15 @@ router.get('/quote/:id', async (req, res) => {
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/SchuelerQuote'
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 message:
+ *                   type: string
+ *                 timestamp:
+ *                   type: string
+ *                   format: date-time
  *       404:
  *         description: No quotes found
  *       500:
@@ -123,7 +147,15 @@ router.get('/random', async (req, res) => {
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/SchuelerQuote'
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 message:
+ *                   type: string
+ *                 timestamp:
+ *                   type: string
+ *                   format: date-time
  *       400:
  *         description: Missing fields
  *       500:
@@ -176,7 +208,15 @@ router.post('/', express.json(), async (req, res) => {
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/SchuelerQuote'
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 message:
+ *                   type: string
+ *                 timestamp:
+ *                   type: string
+ *                   format: date-time
  *       404:
  *         description: Quote not found
  *       500:
