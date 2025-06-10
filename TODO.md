@@ -7,6 +7,7 @@
 
 - [ ] routing 
 - [ ] navbar
+- [ ] usefull ui mockup
 
 ## API
 
@@ -20,4 +21,5 @@
 
 - [ ] import images
 - [ ] filter data with lm studio
+- [ ] finished schema 
 

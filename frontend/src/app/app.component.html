@@ -1,7 +1,24 @@
-<div class="container">
-  <h1>Random Quote</h1>
-  <div class="quote" [innerHTML]="quoteHtml">
-    <code> test</code>
+<div class="main-layout">
+  <div class="settings-panel">
+    <h2>Settings</h2>
+    <label>
+      <input type="checkbox" /> Beispiel-Option
+    </label>
+    <div style="margin-top:1rem; color:#888; font-size:0.9em;">Hier kommen später Settings hin.</div>
   </div>
-  <button (click)="loadQuote()">Reload</button>
+  <div class="container">
+    <h1>Random Quote</h1>
+    <div class="quote" [innerHTML]="quoteHtml"></div>
+
+    <div class="quote-info" *ngIf="currentQuoteObject">
+      <p>ID: {{ currentQuoteObject?.id }}</p>
+      <p>Timestamp: {{ currentQuoteObject?.timestamp }}</p>
+    </div>
+
+    <div class="button-row">
+      <button (click)="GetQuoteById(currentQuoteObject?.id - 1)"><</button>
+      <button (click)="GetRandomQuote()">Reload</button>
+      <button (click)="GetQuoteById(currentQuoteObject?.id + 1)">></button>
+    </div>
+  </div>
 </div>
