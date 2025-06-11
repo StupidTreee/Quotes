@@ -5,37 +5,37 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class QuoteService {
-  private baseUrl = 'http://localhost:3000/api/quotes/schueler';
+  private baseUrl = 'http://localhost:3000/api/quotes';
 
   constructor(private http: HttpClient) {}
 
   // Alle Quotes holen
-  getAllQuotes() {
-    return this.http.get<any[]>(this.baseUrl);
+  getAllQuotes(type: 'schueler' | 'lehrer') {
+    return this.http.get<any[]>(`${this.baseUrl}/${type}`);
   }
 
   // Einzelnes Quote nach ID holen
-  getQuoteById(id: number) {
-    return this.http.get<any>(`${this.baseUrl}/quote/${id}`);
+  getQuoteById(id: number, type: 'schueler' | 'lehrer') {
+    return this.http.get<any>(`${this.baseUrl}/${type}/quote/${id}`);
   }
 
   // Zufälliges Quote holen
-  getRandomQuote() {
-    return this.http.get<any>(`${this.baseUrl}/random`);
+  getRandomQuote(type: 'schueler' | 'lehrer') {
+    return this.http.get<any>(`${this.baseUrl}/${type}/random`);
   }
 
   // Neues Quote anlegen
-  createQuote(quote: { message: string, timestamp: string }) {
-    return this.http.post<any>(this.baseUrl, quote);
+  createQuote(quote: { message: string, timestamp: string }, type: 'schueler' | 'lehrer') {
+    return this.http.post<any>(`${this.baseUrl}/${type}`, quote);
   }
 
   // Quote aktualisieren
-  updateQuote(id: number, quote: { message?: string, timestamp?: string }) {
-    return this.http.patch<any>(`${this.baseUrl}/${id}`, quote);
+  updateQuote(id: number, quote: { message?: string, timestamp?: string }, type: 'schueler' | 'lehrer') {
+    return this.http.patch<any>(`${this.baseUrl}/${type}/${id}`, quote);
   }
 
   // Quote löschen
-  deleteQuote(id: number) {
-    return this.http.delete<any>(`${this.baseUrl}/${id}`);
+  deleteQuote(id: number, type: 'schueler' | 'lehrer') {
+    return this.http.delete<any>(`${this.baseUrl}/${type}/${id}`);
   }
 }

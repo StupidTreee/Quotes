@@ -1,6 +1,29 @@
 <div class="main-layout">
   <div class="settings-panel">
     <h2>Settings</h2>
+    <div style="margin-bottom: 1.5em;">
+      <label style="font-weight: 500; margin-bottom: 0.5em; display: block;">Quote-Typ wählen:</label>
+      <label style="display: flex; align-items: center; gap: 0.5em;">
+        <input
+          type="radio"
+          name="quoteType"
+          value="schueler"
+          [(ngModel)]="quoteType"
+          (change)="onQuoteTypeChange('schueler')"
+        />
+        Schüler
+      </label>
+      <label style="display: flex; align-items: center; gap: 0.5em;">
+        <input
+          type="radio"
+          name="quoteType"
+          value="lehrer"
+          [(ngModel)]="quoteType"
+          (change)="onQuoteTypeChange('lehrer')"
+        />
+        Lehrer
+      </label>
+    </div>
     <label>
       <input type="checkbox" /> Beispiel-Option
     </label>
@@ -35,15 +58,15 @@
 
     <div class="button-row">
       <button 
-      (click)="GetQuoteById(currentQuoteObject?.id - 1)" 
-      (keydown.arrowleft)="GetQuoteById(currentQuoteObject?.id - 1)"
-      tabindex="0"
+          (click)="GetQuoteById(currentQuoteObject?.id - 1)" 
+        (keydown.arrowleft)="GetQuoteById(currentQuoteObject?.id - 1)"
+        tabindex="0"
       >&lt;</button>
       <button (click)="GetRandomQuote()">Reload</button>
       <button 
-      (click)="GetQuoteById(currentQuoteObject?.id + 1)" 
-      (keydown.arrowright)="GetQuoteById(currentQuoteObject?.id + 1)"
-      tabindex="0"
+        (click)="GetQuoteById(currentQuoteObject?.id + 1)" 
+        (keydown.arrowright)="GetQuoteById(currentQuoteObject?.id + 1)"
+        tabindex="0"
       >&gt;</button>
     </div>
   </div>

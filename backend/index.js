@@ -1,23 +1,20 @@
 import express from 'express';
 import cors from 'cors';
-import swaggerUi, { setup } from 'swagger-ui-express';
+import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './docs/swagger.js';
-import schuelerRoutes from './routes/schueler.js';
-import lehrerRoutes from './routes/lehrer.js';
+import quotesRoutes from './routes/quotes.js';
 
-const router = express.Router();
 const app = express();
 app.use(express.json());
 const PORT = 3000;
 
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('API is running!');
 });
 
 app.use(cors());
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-app.use('/api/quotes/schueler', schuelerRoutes);
-app.use('/api/quotes/lehrer', lehrerRoutes);
+app.use('/api/quotes', quotesRoutes);
 app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 app.listen(PORT, () => {

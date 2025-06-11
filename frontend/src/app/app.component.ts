@@ -27,6 +27,8 @@ export class AppComponent {
 
   maxQuoteId: number = 0;
 
+  quoteType: 'schueler' | 'lehrer' = 'schueler';
+
   constructor(private quoteService: QuoteService) {}
 
   ngOnInit() {
@@ -35,11 +37,12 @@ export class AppComponent {
   }
 
   getMaxQuoteId() {
-    // Beispiel: Hole alle Quotes und setze die höchste ID
-    this.quoteService.getAllQuotes().subscribe({
+    this.quoteService.getAllQuotes(this.quoteType).subscribe({
       next: (quotes) => {
         if (quotes && quotes.length > 0) {
           this.maxQuoteId = Math.max(...quotes.map((q: any) => q.id));
+        } else {
+          this.maxQuoteId = 1;
         }
       },
       error: () => {
@@ -84,7 +87,7 @@ export class AppComponent {
     this.searchError = '';
     if (id === this.maxQuoteId + 1) {id = 1}
     if (id === 0) {id = this.maxQuoteId}
-    this.quoteService.getQuoteById(id).subscribe({
+    this.quoteService.getQuoteById(id, this.quoteType).subscribe({
       next: (data) => {
         if (!data || !data.message) {
           this.searchError = 'Kein Zitat mit dieser ID gefunden.';
@@ -109,7 +112,7 @@ export class AppComponent {
   }
 
   GetRandomQuote() {
-    this.quoteService.getRandomQuote().subscribe({
+    this.quoteService.getRandomQuote(this.quoteType).subscribe({
       next: (data) => {
         this.currentQuoteObject = data;
         this.quote = data.message;
@@ -150,5 +153,11 @@ export class AppComponent {
       }
       event.preventDefault();
     }
+  }
+
+  onQuoteTypeChange(type: 'schueler' | 'lehrer') {
+    this.quoteType = type;
+    this.GetRandomQuote();
+    this.getMaxQuoteId();
   }
 }
