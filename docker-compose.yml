@@ -15,7 +15,7 @@ services:
       - "5432:5432"
 
   api:
-    image: node:22-slim
+    image: node:20-slim
     container_name: api_quotes
     working_dir: /app
     ports:
@@ -29,7 +29,7 @@ services:
 
 # frontend angular (dev)
   frontend:
-    image: node:22-slim
+    image: node:20-slim
     container_name: frontend_quotes
     ports:
       - "4200:4200"
