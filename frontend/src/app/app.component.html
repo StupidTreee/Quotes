@@ -5,8 +5,26 @@
       <input type="checkbox" /> Beispiel-Option
     </label>
     <div style="margin-top:1rem; color:#888; font-size:0.9em;">Hier kommen später Settings hin.</div>
+
+      <!-- Zitat nach ID suchen -->
+      <div class="search-row">
+        <label for="quoteIdInput">Zitat nach ID suchen:</label>
+        <input
+          id="quoteIdInput"
+          type="number"
+          [(ngModel)]="searchId"
+          (keydown)="onIdInputKeydown($event)"
+          (keydown.enter)="searchQuoteById(searchId)"
+          min="1"
+          [max]="maxQuoteId"
+        />
+        <button (click)="searchQuoteById(searchId)">Suchen</button>
+      </div>  
+      <div *ngIf="searchError" class="error-popup">
+        {{ searchError }}
+      </div>
   </div>
-  <div class="container">
+  <div class="quote-panel">
     <h1>Random Quote</h1>
     <div class="quote" [innerHTML]="quoteHtml"></div>
 
@@ -16,9 +34,17 @@
     </div>
 
     <div class="button-row">
-      <button (click)="GetQuoteById(currentQuoteObject?.id - 1)"><</button>
+      <button 
+      (click)="GetQuoteById(currentQuoteObject?.id - 1)" 
+      (keydown.arrowleft)="GetQuoteById(currentQuoteObject?.id - 1)"
+      tabindex="0"
+      >&lt;</button>
       <button (click)="GetRandomQuote()">Reload</button>
-      <button (click)="GetQuoteById(currentQuoteObject?.id + 1)">></button>
+      <button 
+      (click)="GetQuoteById(currentQuoteObject?.id + 1)" 
+      (keydown.arrowright)="GetQuoteById(currentQuoteObject?.id + 1)"
+      tabindex="0"
+      >&gt;</button>
     </div>
   </div>
 </div>

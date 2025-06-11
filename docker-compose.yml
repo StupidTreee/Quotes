@@ -15,7 +15,7 @@ services:
       - "5432:5432"
 
   api:
-    image: node:22-slim
+    image: node:22  -slim
     container_name: api_quotes
     working_dir: /app
     ports:
