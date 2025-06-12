@@ -3,6 +3,7 @@
 ## General
 - [ ] Deployment auf altem Laptop testen
 - [ ] Eigene Domain registrieren und konfigurieren
+- [ ] OAuth !!!!!
 
 ## Backend
 - [x] Angular-Frontend in Docker-Container integrieren

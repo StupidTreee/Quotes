@@ -25,12 +25,12 @@ export class QuoteService {
   }
 
   // Neues Quote anlegen
-  createQuote(quote: { message: string, timestamp: string }, type: 'schueler' | 'lehrer') {
+  createQuote(quote: { message: string, timestamp: number }, type: 'schueler' | 'lehrer') {
     return this.http.post<any>(`${this.baseUrl}/${type}`, quote);
   }
 
   // Quote aktualisieren
-  updateQuote(id: number, quote: { message?: string, timestamp?: string }, type: 'schueler' | 'lehrer') {
+  updateQuote(id: number, quote: { message?: string, timestamp?: number }, type: 'schueler' | 'lehrer') {
     return this.http.patch<any>(`${this.baseUrl}/${type}/${id}`, quote);
   }
 

@@ -1,9 +1,17 @@
+<div class="notification-container">
+  <div class="notification" *ngFor="let note of notifications">
+    {{ note.message }}
+  </div>
+</div>
+
 <div class="main-layout">
   <div class="settings-panel">
     <h2>Settings</h2>
-    <div style="margin-bottom: 1.5em;">
-      <label style="font-weight: 500; margin-bottom: 0.5em; display: block;">Quote-Typ wählen:</label>
-      <label style="display: flex; align-items: center; gap: 0.5em;">
+
+    <!-- Auswahl des Quote-Typs und Suche (bereits vorhanden) -->
+    <div class="quote-type-selection">
+      <label class="selection-label">Quote-Typ wählen:</label>
+      <label class="radio-option">
         <input
           type="radio"
           name="quoteType"
@@ -13,7 +21,7 @@
         />
         Schüler
       </label>
-      <label style="display: flex; align-items: center; gap: 0.5em;">
+      <label class="radio-option">
         <input
           type="radio"
           name="quoteType"
@@ -24,41 +32,51 @@
         Lehrer
       </label>
     </div>
-    <label>
-      <input type="checkbox" /> Beispiel-Option
-    </label>
-    <div style="margin-top:1rem; color:#888; font-size:0.9em;">Hier kommen später Settings hin.</div>
 
-      <!-- Zitat nach ID suchen -->
-      <div class="search-row">
-        <label for="quoteIdInput">Zitat nach ID suchen:</label>
-        <input
-          id="quoteIdInput"
-          type="number"
-          [(ngModel)]="searchId"
-          (keydown)="onIdInputKeydown($event)"
-          (keydown.enter)="searchQuoteById(searchId)"
-          min="1"
-          [max]="maxQuoteId"
-        />
-        <button (click)="searchQuoteById(searchId)">Suchen</button>
-      </div>  
-      <div *ngIf="searchError" class="error-popup">
-        {{ searchError }}
+    <!-- Suche nach Quote-ID -->
+    <div class="search-row">
+      <label for="quoteIdInput" class="input-label">Zitat nach ID suchen:</label>
+      <input
+        id="quoteIdInput"
+        type="number"
+        [(ngModel)]="searchId"
+        (keydown)="onIdInputKeydown($event)"
+        (keydown.enter)="searchQuoteById(searchId)"
+        min="1"
+        [max]="maxQuoteId"
+      />
+      <button (click)="searchQuoteById(searchId)">Suchen</button>
+    </div>
+    <div *ngIf="searchError" class="error-popup">
+      {{ searchError }}
+    </div>
+
+    <!-- Abschnitt zum Hinzufügen eines neuen Zitats -->
+    <div class="add-quote-section">
+      <button (click)="toggleAddQuote()" class="toggle-button">
+        {{ showAddQuote ? 'Abbrechen' : 'Zitat hinzufügen' }}
+      </button>
+      <div class="add-quote-form" *ngIf="showAddQuote">
+        <label for="quoteMessage" class="input-label">Zitat:</label>
+        <textarea id="quoteMessage" [(ngModel)]="newQuote.message"></textarea>
+        <label for="quoteTimestamp" class="input-label">Timestamp (Unix):</label>
+        <input id="quoteTimestamp" type="number" [(ngModel)]="newQuote.timestamp" />
+        <button (click)="addQuote()">Hinzufügen</button>
       </div>
+    </div>
   </div>
+
+  <!-- Hier folgt der Quote-Anzeigebereich -->
   <div class="quote-panel">
     <h1>Random Quote</h1>
     <div class="quote" [innerHTML]="quoteHtml"></div>
-
     <div class="quote-info" *ngIf="currentQuoteObject">
       <p>ID: {{ currentQuoteObject?.id }}</p>
-      <p>Timestamp: {{ currentQuoteObject?.timestamp }}</p>
+      <p>Timestamp: {{ formatTimestamp(currentQuoteObject?.timestamp) }}</p>
     </div>
-
     <div class="button-row">
       <button 
-          (click)="GetQuoteById(currentQuoteObject?.id - 1)" 
+        (click)="GetQuoteById(currentQuoteObject?.id - 1)" 
         (keydown.arrowleft)="GetQuoteById(currentQuoteObject?.id - 1)"
         tabindex="0"
       >&lt;</button>

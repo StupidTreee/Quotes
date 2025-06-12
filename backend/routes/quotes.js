@@ -24,7 +24,7 @@ function getTable(type) {
  *     responses:
  *       200:
  *         description: List of quotes
- *         content:ok 
+ *         content:
  *           application/json:
  *             schema:
  *               type: array
@@ -182,6 +182,10 @@ router.post('/:type', express.json(), async (req, res) => {
       `INSERT INTO ${table} (message, timestamp) VALUES ($1, $2) RETURNING *`,
       [message, timestamp]
     );
+    // Hole die Socket.IO-Instanz
+    const io = req.app.get('socketio');
+    // Sende eine Benachrichtigung (z.B. "quoteAdded")
+    io.emit("quoteAdded", { type, quote: result.rows[0] });
     res.status(201).json(result.rows[0]);
   } catch (err) {
     res.status(400).json({ error: 'Invalid type' });
@@ -243,6 +247,8 @@ router.patch('/:type/:id', express.json(), async (req, res) => {
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Quote not found' });
     }
+    const io = req.app.get('socketio');
+    io.emit("quoteUpdated", { type, quote: result.rows[0] });
     res.status(200).json(result.rows[0]);
   } catch (err) {
     res.status(400).json({ error: 'Invalid type' });
@@ -284,6 +290,8 @@ router.delete('/:type/:id', async (req, res) => {
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Quote not found' });
     }
+    const io = req.app.get('socketio');
+    io.emit("quoteDeleted", { type, id });
     res.status(200).json({ message: 'Quote deleted' });
   } catch (err) {
     res.status(400).json({ error: 'Invalid type' });

@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { QuoteService } from './services/quote.service';
+import { WebsocketService } from './services/websocket.service';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 // to respect \n in markdown
 marked.setOptions({ breaks: true });
@@ -12,11 +14,11 @@ marked.setOptions({ breaks: true });
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [NgIf, FormsModule]
+  imports: [NgIf, FormsModule, CommonModule]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   quote: string = '';
   quoteHtml: string = '';
   currentQuoteObject: any;
@@ -29,11 +31,43 @@ export class AppComponent {
 
   quoteType: 'schueler' | 'lehrer' = 'schueler';
 
-  constructor(private quoteService: QuoteService) {}
+  showAddQuote: boolean = false;
+  newQuote: { message: string, timestamp: number } = { message: '', timestamp: Math.floor(Date.now() / 1000) };
+
+  notifications: { message: string, type?: string }[] = [];
+
+  constructor(private quoteService: QuoteService,
+              private websocketService: WebsocketService) {}
 
   ngOnInit() {
     this.GetRandomQuote();
-    this.getMaxQuoteId(); // Optional: Max-ID dynamisch holen
+    this.getMaxQuoteId();
+    this.listenForNotifications();
+  }
+
+  listenForNotifications() {
+    this.websocketService.onQuoteAdded().subscribe(data => {
+      console.log("Notification received: Quote added", data);
+      this.addNotification('Quote added');
+    });
+
+    this.websocketService.onQuoteUpdated().subscribe(data => {
+      console.log("Notification received: Quote updated", data);
+      this.addNotification('Quote updated');
+    });
+
+    this.websocketService.onQuoteDeleted().subscribe(data => {
+      console.log("Notification received: Quote deleted", data);
+      this.addNotification('Quote deleted');
+    });
+  }
+
+  addNotification(message: string, type: string = 'info'): void {
+    this.notifications.push({ message, type });
+    // Entferne die Notification nach 3 Sekunden:
+    setTimeout(() => {
+      this.notifications.shift();
+    }, 3000);
   }
 
   getMaxQuoteId() {
@@ -159,5 +193,35 @@ export class AppComponent {
     this.quoteType = type;
     this.GetRandomQuote();
     this.getMaxQuoteId();
+  }
+
+  formatTimestamp(ts: number | string): string {
+    // Falls der Timestamp als String kommt, in Zahl umwandeln
+    const date = new Date(Number(ts) * 1000);
+    return date.toLocaleString('de-DE', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+
+  toggleAddQuote(): void {
+    this.showAddQuote = !this.showAddQuote;
+  }
+
+  addQuote(): void {
+    // Beispiel: Verwendung des aktuellen quoteType; passe ggf. die Logik an
+    this.quoteService.createQuote(this.newQuote, this.quoteType).subscribe({
+      next: (data) => {
+        console.log("Quote hinzugefügt:", data);
+        this.toggleAddQuote(); // Formular schließen
+        // Optional: Liste aktualisieren oder Notification auslösen
+      },
+      error: (err) => {
+        console.error("Fehler beim Hinzufügen der Quote", err);
+      }
+    });
   }
 }

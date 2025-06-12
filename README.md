@@ -14,7 +14,6 @@ Dieses Full-Stack-Projekt demonstriert die Entwicklung einer modernen Webanwendu
 - Echtzeit-Benachrichtigungen per WebSocket
 
 Für weitere Features bitte [TODOs.md](./TODOs.md) ansehen.
-Bitte beachten sie aber das ich dieses nach Abgabe weiterführen werde, daher kann es so wirken als wenn laut TODOs noch viel fehlt
 ## Projektstruktur
 - `backend/` – Node.js/Express API, Datenbank, Routen, WebSocket-Server
 - `frontend/` – Angular App (Standalone Components, WebSocket-Client)
@@ -47,10 +46,9 @@ Die Anwendung ist dann unter [http://localhost:4200](http://localhost:4200) erre
 - README.md enthält alle relevanten Infos, Startanleitung und Projektübersicht.
 - Optional: Link zu einem Demo-Video ergänzen.
 
-## ToDo
-- Quote-Tabelle/Liste
-- Navbar für Navigation
-- Weitere Settings
+## Kommentar für Herr Prf. Höf.
+Aus eignenem Intersse werde ich dieses Projekt Privat weiterführen weswegen es von den TODOs her so ausschauen könnte als ob ich nicht fertig bin was ja auch so ist. Für die Abgabe werde ich allerdings alle Punkte ihrer Angabe bestmöglich erfüllen. Daher bitte [TODOs.md](die TODOs) nicht als Bewertend zu nehmen. Es sind nämlich auch dinge wie OAuth geplant welche ja nicht gefordert werden
+Desweiteren sollte ich Sie darauf hinweisen das ich ihnen aus gutem Grund nicht alle Zitate zeige bzw sie jetzt hier nicht einbaue, da einige davon vor allem für Sie eher weniger lustig wären (und die meisten wollten das auch einfach nicht).
 
 ## Lizenz
 MIT
