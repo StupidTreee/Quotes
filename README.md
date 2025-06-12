@@ -13,6 +13,8 @@ Dieses Full-Stack-Projekt demonstriert die Entwicklung einer modernen Webanwendu
 - Verwaltungsmasken zum Hinzufügen, Bearbeiten und Löschen von Zitaten
 - Echtzeit-Benachrichtigungen per WebSocket
 
+Für weitere Features bitte [TODOs.md](./TODOs.md) ansehen.
+Bitte beachten sie aber das ich dieses nach Abgabe weiterführen werde, daher kann es so wirken als wenn laut TODOs noch viel fehlt
 ## Projektstruktur
 - `backend/` – Node.js/Express API, Datenbank, Routen, WebSocket-Server
 - `frontend/` – Angular App (Standalone Components, WebSocket-Client)
