@@ -8,7 +8,6 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
 dist-ssr
 *.local
 
@@ -22,3 +21,13 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# PyInstaller artifacts in import_quotes build
+postgres_init/*.toc
+postgres_init/*.pyz
+postgres_init/*.pkg
+postgres_init/warn-*
+postgres_init/xref-*
+
+# PyInstaller build artifacts
+postgres_init/build/

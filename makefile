@@ -1,4 +1,4 @@
-# determine os
+# Determine OS
 ifeq ($(OS),Windows_NT)
     OS := Windows
 else
@@ -8,17 +8,19 @@ endif
 # Linux
 ifeq ($(OS),Linux)
     SLEEP_CMD := sleep 5
+    EXECUTABLE := ./backend/postgres_init/dist/import_quotes/import_quotes
 endif
 
 # Windows
 ifeq ($(OS),Windows)
     SLEEP_CMD := timeout /t 5
+    EXECUTABLE := .\backend\postgres_init\dist\import_quotes\import_quotes
 endif
 
 up:
 	docker compose up -d
 	$(SLEEP_CMD)
-	python ./backend/postgres_init/import_quotes.py
+	$(EXECUTABLE)
 
 down:
 	docker compose down -v
@@ -26,10 +28,10 @@ down:
 reb:
 	docker compose restart
 	$(SLEEP_CMD)
-	python ./backend/postgres_init/import_quotes.py
+	$(EXECUTABLE)
 
 build:
 	docker compose build
 	docker compose up -d
 	$(SLEEP_CMD)
-	python ./backend/postgres_init/import_quotes.py
+	$(EXECUTABLE)
