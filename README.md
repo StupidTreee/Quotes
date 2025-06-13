@@ -47,7 +47,7 @@ Die Anwendung ist dann unter [http://localhost:4200](http://localhost:4200) erre
 - Optional: Link zu einem Demo-Video ergänzen.
 
 ## Kommentar für Herr Prf. Höf.
-Aus eignenem Intersse werde ich dieses Projekt Privat weiterführen weswegen es von den TODOs her so ausschauen könnte als ob ich nicht fertig bin was ja auch so ist. Für die Abgabe werde ich allerdings alle Punkte ihrer Angabe bestmöglich erfüllen. Daher bitte [TODOs.md](die TODOs) nicht als Bewertend zu nehmen. Es sind nämlich auch dinge wie OAuth geplant welche ja nicht gefordert werden
+Aus eignenem Intersse werde ich dieses Projekt Privat weiterführen weswegen es von den TODOs her so ausschauen könnte als ob ich nicht fertig bin was ja auch so ist. Für die Abgabe werde ich allerdings alle Punkte ihrer Angabe bestmöglich erfüllen. Daher bitte [TODOs](./TODOs.md) nicht als Bewertend zu nehmen. Es sind nämlich auch dinge wie OAuth geplant welche ja nicht gefordert werden
 Desweiteren sollte ich Sie darauf hinweisen das ich ihnen aus gutem Grund nicht alle Zitate zeige bzw sie jetzt hier nicht einbaue, da einige davon vor allem für Sie eher weniger lustig wären (und die meisten wollten das auch einfach nicht). 
 
 ## Lizenz
