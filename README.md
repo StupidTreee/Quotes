@@ -24,12 +24,15 @@ Für weitere Features bitte [TODOs.md](./TODOs.md) ansehen.
 ### Voraussetzungen
 - [Docker](https://www.docker.com/) installiert
 - Node.js & npm (nur für lokale Entwicklung)
+- Für den manuellen Datenbankimport: Python 3 und das Paket `psycopg2` installiert (`pip install psycopg2`)
 
 ### Schnellstart
 
 ```sh
 make up
 ```
+Hier sollte ich erwähnen das mir bewusst ist das ich mit den exectutables für das import script ein wenig gepfusched habe allerdings funktioniert es von daher lasse ich es wie es ist
+
 oder falls man `make` nicht hat
 ```sh
 docker-compose up --build
@@ -47,7 +50,7 @@ Die Anwendung ist dann unter [http://localhost:4200](http://localhost:4200) erre
 - Optional: Link zu einem Demo-Video ergänzen.
 
 ## Kommentar für Herr Prf. Höf.
-Aus eignenem Intersse werde ich dieses Projekt Privat weiterführen weswegen es von den TODOs her so ausschauen könnte als ob ich nicht fertig bin was ja auch so ist. Für die Abgabe werde ich allerdings alle Punkte ihrer Angabe bestmöglich erfüllen. Daher bitte [TODOs](./TODOs.md) nicht als Bewertend zu nehmen. Es sind nämlich auch dinge wie OAuth geplant welche ja nicht gefordert werden
+Aus eignem Intersse werde ich dieses Projekt Privat weiterführen weswegen es von den TODOs her so ausschauen könnte als ob ich nicht fertig bin was ja auch so ist. Für die Abgabe werde ich allerdings alle Punkte ihrer Angabe bestmöglich erfüllen. Daher bitte [TODOs](./TODOs.md) nicht als Bewertend zu nehmen. Es sind nämlich auch dinge wie OAuth geplant welche ja nicht gefordert werden
 Desweiteren sollte ich Sie darauf hinweisen das ich ihnen aus gutem Grund nicht alle Zitate zeige bzw sie jetzt hier nicht einbaue, da einige davon vor allem für Sie eher weniger lustig wären (und die meisten wollten das auch einfach nicht). 
 
 ## Lizenz
