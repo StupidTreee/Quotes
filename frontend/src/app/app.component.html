@@ -8,9 +8,9 @@
   <div class="settings-panel">
     <h2>Settings</h2>
 
-    <!-- Auswahl des Quote-Typs und Suche (bereits vorhanden) -->
+    <!-- Selection for Quote Type and Search -->
     <div class="quote-type-selection">
-      <label class="selection-label">Quote-Typ wählen:</label>
+      <label class="selection-label">Select Quote Type:</label>
       <label class="radio-option">
         <input
           type="radio"
@@ -33,9 +33,9 @@
       </label>
     </div>
 
-    <!-- Suche nach Quote-ID -->
+    <!-- Search by Quote ID -->
     <div class="search-row">
-      <label for="quoteIdInput" class="input-label">Zitat nach ID suchen:</label>
+      <label for="quoteIdInput" class="input-label">Search Quote by ID:</label>
       <input
         id="quoteIdInput"
         type="number"
@@ -45,28 +45,37 @@
         min="1"
         [max]="maxQuoteId"
       />
-      <button (click)="searchQuoteById(searchId)">Suchen</button>
+      <button (click)="searchQuoteById(searchId)">Search</button>
     </div>
     <div *ngIf="searchError" class="error-popup">
       {{ searchError }}
     </div>
 
-    <!-- Abschnitt zum Hinzufügen eines neuen Zitats -->
+    <!-- Section to Add a New Quote -->
     <div class="add-quote-section">
       <button (click)="toggleAddQuote()" class="toggle-button">
-        {{ showAddQuote ? 'Abbrechen' : 'Zitat hinzufügen' }}
+        {{ showAddQuote ? 'Cancel' : 'Add Quote' }}
       </button>
       <div class="add-quote-form" *ngIf="showAddQuote">
-        <label for="quoteMessage" class="input-label">Zitat:</label>
+        <label for="quoteMessage" class="input-label">Quote:</label>
         <textarea id="quoteMessage" [(ngModel)]="newQuote.message"></textarea>
         <label for="quoteTimestamp" class="input-label">Timestamp (Unix):</label>
         <input id="quoteTimestamp" type="number" [(ngModel)]="newQuote.timestamp" />
-        <button (click)="addQuote()">Hinzufügen</button>
+        <button (click)="addQuote()">Add</button>
       </div>
+    </div>
+
+    <!-- Delete Button in Settings Panel -->
+    <div class="delete-quote-section">
+      <button 
+        (click)="deleteCurrentQuote()" 
+        class="delete-button"
+        tabindex="0"
+      >Delete Current Quote</button>
     </div>
   </div>
 
-  <!-- Hier folgt der Quote-Anzeigebereich -->
+  <!-- Quote Display Area -->
   <div class="quote-panel">
     <h1>Random Quote</h1>
     <div class="quote" [innerHTML]="quoteHtml"></div>
@@ -74,18 +83,11 @@
       <p>ID: {{ currentQuoteObject?.id }}</p>
       <p>Timestamp: {{ formatTimestamp(currentQuoteObject?.timestamp) }}</p>
     </div>
+    <!-- Navigation Button Row Using nextQuote() and previousQuote() -->
     <div class="button-row">
-      <button 
-        (click)="GetQuoteById(currentQuoteObject?.id - 1)" 
-        (keydown.arrowleft)="GetQuoteById(currentQuoteObject?.id - 1)"
-        tabindex="0"
-      >&lt;</button>
-      <button (click)="GetRandomQuote()">Reload</button>
-      <button 
-        (click)="GetQuoteById(currentQuoteObject?.id + 1)" 
-        (keydown.arrowright)="GetQuoteById(currentQuoteObject?.id + 1)"
-        tabindex="0"
-      >&gt;</button>
+      <button (click)="previousQuote()" tabindex="0">&lt;</button>
+      <button (click)="getRandomQuote()">Reload</button>
+      <button (click)="nextQuote()" tabindex="0">&gt;</button>
     </div>
   </div>
 </div>

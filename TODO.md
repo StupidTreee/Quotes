@@ -27,7 +27,8 @@
 - [ ] Routing im Frontend implementieren (z.B. für verschiedene Seiten/Views)
 - [ ] navbar adden
 - [ ] UI strukturierter gestalten (Mockup/Figma als Vorlage)
-- [ ] Tailwind CSS statt plain SCSS usen
+- [ ] Tailwind CSS statt SCSS usen
+  - stellt sich als schwieriger heraus weil tailwind nicht mit scss kompatipel ist. Muss auf css migraten
 
 ### Settings Panel
 - [x] Suche nach Quote-ID ermöglichen
