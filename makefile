@@ -14,7 +14,7 @@ endif
 # Windows
 ifeq ($(OS),Windows)
     SLEEP_CMD := timeout /t 5
-    EXECUTABLE := .\backend\postgres_init\dist\import_quotes\import_quotes
+    EXECUTABLE := .\backend\postgres_init\dist\import_quotes_win\import_quotes.exe
 endif
 
 up:
