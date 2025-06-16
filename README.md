@@ -41,14 +41,6 @@ python ./backend/postgres_init/import_quotes.py
 
 Die Anwendung ist dann unter [http://localhost:4200](http://localhost:4200) erreichbar (bzw. per Domain, sobald deployed).
 
-## Hinweise zur Abgabe
-- Alle Komponenten (Backend, Frontend, Doku) sind vollständig und getestet.
-- REST-API ist per SwaggerUI dokumentiert und testbar.
-- WebSocket-Kommunikation ist implementiert und getestet.
-- Docker-Container für Backend und Datenbank vorhanden, Express.js dient statische Angular-Dateien aus.
-- README.md enthält alle relevanten Infos, Startanleitung und Projektübersicht.
-- Optional: Link zu einem Demo-Video ergänzen.
-
 ## Kommentar für Herr Prf. Höf.
 Aus eignem Intersse werde ich dieses Projekt Privat weiterführen weswegen es von den TODOs her so ausschauen könnte als ob ich nicht fertig bin was ja auch so ist. Für die Abgabe werde ich allerdings alle Punkte ihrer Angabe bestmöglich erfüllen. Daher bitte [TODOs](./TODOs.md) nicht als Bewertend zu nehmen. Es sind nämlich auch dinge wie OAuth geplant welche ja nicht gefordert werden
 Desweiteren sollte ich Sie darauf hinweisen das ich ihnen aus gutem Grund nicht alle Zitate zeige bzw sie jetzt hier nicht einbaue, da einige davon vor allem für Sie eher weniger lustig wären (und die meisten wollten das auch einfach nicht). 
